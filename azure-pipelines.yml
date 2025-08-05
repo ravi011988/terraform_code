@@ -5,10 +5,21 @@
 
 trigger: none
 
-pool: classic_agent_pool
+pool: Agent-pool
 
-stages: [ stage | template ]
+steps:
 
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
+    
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: 'service-connection-1'
+    backendAzureRmStorageAccountName: 'yamlstorage01'
+    backendAzureRmContainerName: 'yamlcontainer'
+    backendAzureRmKey: '.tfstate'
+
+

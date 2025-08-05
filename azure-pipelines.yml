@@ -1,29 +1,37 @@
 trigger: none
 
-pool: Agent-pool
+pool:
+  name: Agent-pool   # Make sure this agent has access to the internet/tools
 
 steps:
 
+# ✅ Install Terraform (latest version)
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
-    
-- task: TerraformTask@5
+
+# ✅ Terraform Init
+
+- task: TerraformTaskV5@5
   inputs:
     provider: 'azurerm'
     command: 'init'
     backendServiceArm: 'service-connection-1'
+    backendAzureRmResourceGroupName: 'rg_001'  # 🔴 REQUIRED
     backendAzureRmStorageAccountName: 'yamlstorage01'
     backendAzureRmContainerName: 'yamlcontainer'
     backendAzureRmKey: '.tfstate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/ravi011988/terraform_code'
 
-- task: TerraformTask@5
+# ✅ Terraform Validate
+- task: TerraformTaskV5@5
   inputs:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: '$(System.DefaultWorkingDirectory)/ravi011988/terraform_code'
 
-- task: TerraformTask@5
+# ✅ Terraform Plan
+- task: TerraformTaskV5@5
   inputs:
     provider: 'azurerm'
     command: 'plan'

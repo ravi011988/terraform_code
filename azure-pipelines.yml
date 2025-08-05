@@ -16,3 +16,16 @@ steps:
     backendAzureRmStorageAccountName: 'yamlstorage01'
     backendAzureRmContainerName: 'yamlcontainer'
     backendAzureRmKey: '.tfstate'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/ravi011988/terraform_code'
+
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/ravi011988/terraform_code'
+    environmentServiceNameAzureRM: 'service-connection-1'

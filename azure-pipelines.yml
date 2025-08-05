@@ -22,4 +22,9 @@ steps:
     backendAzureRmContainerName: 'yamlcontainer'
     backendAzureRmKey: '.tfstate'
 
-
+- task: AppCenterTest@1
+  inputs:
+    artifactsDirectory: '$(Build.ArtifactStagingDirectory)/AppCenterTest'
+    frameworkOption: 'appium'
+    credentialsOption: 'serviceEndpoint'
+    localeOption: 'en_US'

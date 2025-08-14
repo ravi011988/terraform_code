@@ -1,0 +1,11 @@
+# .github/workflows/hello-world.yml
+name: Hello World Pipeline
+
+on: [push]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Greet the world
+      run: echo "Hello from GitHub Actions!"

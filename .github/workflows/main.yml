@@ -1,11 +1,17 @@
-# .github/workflows/hello-world.yml
-name: Hello World Pipeline
+name: "my first workflow"
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'features/**'
+      - 'main'
+      - 'hotfix/**'
 
 jobs:
-  say-hello:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Greet the world
-      run: echo "Hello from GitHub Actions!"
+  terraform:
+    name: terraform init to plan
+    runs-on: runner
+    steps: 
+      - name: terraform init
+        run: eacho terraform init
+  

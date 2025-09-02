@@ -13,5 +13,5 @@ jobs:
     runs-on: runner
     steps: 
       - name: terraform init
-        run: eacho terraform init
+        run: echo terraform init
   

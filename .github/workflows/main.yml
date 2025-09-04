@@ -26,9 +26,10 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
-          client-id: bebd9523-e330-4e73-bc42-90efa466f8ab
-          tenant-id: edc46f5e-3269-421e-84fb-da0d4f8b7263
-          subscription-id: b3b6b7ed-0b15-49ca-b3ce-092e07ca3fef
+          creds: ${{secrets.secret_01}}
+          #client-id: bebd9523-e330-4e73-bc42-90efa466f8ab
+          #tenant-id: edc46f5e-3269-421e-84fb-da0d4f8b7263
+          #subscription-id: b3b6b7ed-0b15-49ca-b3ce-092e07ca3fef
           #auth-type: federated
    
       - name: Terraform Format Check

@@ -5,7 +5,8 @@ on:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write         # ✅ Needed to read/write repo contents
+  issues: write  
 
 jobs:
   build:

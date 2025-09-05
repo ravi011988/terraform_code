@@ -31,5 +31,22 @@ jobs:
       - name: Terraform Plan
         run: terraform plan
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+  manual_validation:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+     - name: Manual Workflow Approval
+       uses: trstringer/manual-approval@v1.9.0
+       with:
+         approvers: goyalece@gmail.com
+         secret: ${{ secrets.APPROVAL_SECRET }}
+         minimum-approvals: 1
+
+  deploy:
+    runs-on: runner
+    needs: manual_validation
+
+    steps:
+     - name: Terraform Apply
+       run: terraform apply -auto-approve

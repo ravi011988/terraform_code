@@ -39,7 +39,7 @@ jobs:
      - name: Manual Workflow Approval
        uses: trstringer/manual-approval@v1.9.0
        with:
-         approvers: goyalece@gmail.com
+         approvers: ravi011988
          secret: ${{ secrets.APPROVAL_SECRET }}
          minimum-approvals: 1
 

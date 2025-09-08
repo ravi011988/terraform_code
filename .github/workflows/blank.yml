@@ -1,12 +1,16 @@
-name: manual workflow
+name: Dev_workflow
 
 on: 
-  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 permissions:
   id-token: write
-  contents: write         # ✅ Needed to read/write repo contents
-  issues: write  
+  contents: read 
 
 jobs:
   build:
@@ -31,18 +35,6 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
-
-  manual_validation:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-     - name: Manual Workflow Approval
-       uses: trstringer/manual-approval@v1.9.0
-       with:
-         approvers: ravi011988
-         secret: ${{ secrets.APPROVAL_SECRET }}
-         minimum-approvals: 1
 
   deploy:
     runs-on: runner
